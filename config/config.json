@@ -1,5 +1,13 @@
 {
   "development": {
+    "username": "star",
+    "password": "0alnQXkQpJDlyTN77ts3skSl9XtShu5m",
+    "database": "starfurniture",
+    "host": "dpg-d5citmur433s739octl0-a",
+    "port": "5432",
+    "dialect": "postgres"
+  },
+  "development1": {
     "username": "postgres",
     "password": "Libin@04",
     "database": "FurnitureManagement",
