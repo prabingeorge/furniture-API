@@ -8,7 +8,7 @@ const { User,   Categories, CategoriesLists, CategoriesListItems, PurchaseDetail
 
 const router = express.Router();
 
-// Get all categories (for the authenticated user)
+// Get all categories
 // router.get("/categories", auth, async (req, res) => {
 router.get("/categories", async (req, res) => {
   try {
@@ -45,8 +45,8 @@ router.post("/categories-list", async (req, res) => {
     }
 });
 
-// Get all categories-list (for the authenticated user)
-router.get("/categories-list", auth, async (req, res) => {
+// Get all categories-list
+router.get("/categories-list", async (req, res) => {
   try {
     const categoriesList = await CategoriesLists.findAll();
     res.json(categoriesList);
@@ -55,8 +55,8 @@ router.get("/categories-list", auth, async (req, res) => {
   }
 });
 
-// Get all categories-list by id (for the authenticated user)
-router.post("/categories-list-by-id", auth, async (req, res) => {
+// Get all categories-list by id
+router.post("/categories-list-by-id", async (req, res) => {
   try {
     const { category_id } = req.body;
     const categoriesList = await CategoriesLists.findAll({ where: { [Op.or]: [{ category_id }] } });
@@ -96,7 +96,7 @@ router.post("/categories-list-items", async (req, res) => {
     }
 });
 
-// Get all categories-list-items by id (for the authenticated user)
+// Get all categories-list-items by id
 router.post("/categories-list-items-by-id", auth, async (req, res) => {
   try {
     const { listId } = req.body;
@@ -107,8 +107,8 @@ router.post("/categories-list-items-by-id", auth, async (req, res) => {
   }
 });
 
-// Get categories-list-items details by list_item_id (for the authenticated user)
-router.post("/categories-list-items-details", auth, async (req, res) => {
+// Get categories-list-items details by list_item_id
+router.post("/categories-list-items-details", async (req, res) => {
   try {
     const { id } = req.body;
     const categoriesListItems = await CategoriesListItems.findAll({ where: { [Op.or]: [{ id }] } });
