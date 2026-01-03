@@ -1,6 +1,14 @@
 {
   "development": {
-     "username": "postgres",
+    "username": "demo_user",
+    "password": "yRNg347sCS0TdBG4C9eAjs4lHOrAVkSK",
+    "database": "furnituremanagement",
+    "host": "dpg-d5ccm3m3jp1c73dqs200-a",
+    "port": "5432",
+    "dialect": "postgres"
+  },
+  "development1": {
+    "username": "postgres",
     "password": "Libin@04",
     "database": "FurnitureManagement",
     "host": "localhost",
