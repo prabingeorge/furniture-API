@@ -89,7 +89,7 @@ router.post("/categories-list-items-details", async (req, res) => {
 });
 
 // Add purchase detail (for the authenticated user)
-router.post("/purchase-detail", async (req, res) => {
+router.post("/purchase-detail", auth, async (req, res) => {
     const { userId, categoriesId, listId, listItemId, quantity, amount } = req.body;
     console.log("======" + JSON.stringify(req.body))
     try {
@@ -117,6 +117,16 @@ router.post("/purchase-detail", async (req, res) => {
             .send(
                 { message: 'Could not perform operation at this time, kindly try again later.' });
     }
+});
+
+// Get all categories-list
+router.get("/purchase-details", async (req, res) => {
+  try {
+    const purchaseDetails = await PurchaseDetails.findAll();
+    res.json(purchaseDetails);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 export default router;
