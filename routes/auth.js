@@ -156,13 +156,13 @@ router.post("/categories-list", async (req, res) => {
 // Add Categories-list-items
 router.post("/categories-list-items", async (req, res) => {
     const { itemName, imageName, price, discountPrice, ratings, sendItemsCount, listId } = req.body;
-    console.log("======" + JSON.stringify(req.body))
+    console.log("====== First " + JSON.stringify(req.body))
     try {
-        const categoriesListItems = await CategoriesListItems.findOne({ where: { [Op.or]: [{ item_name: itemName }] } });
-        if (categoriesListItems) {
-            return res.status(422)
-                .send({ message: 'Item name already exists' });
-        }
+        // const categoriesListItems = await CategoriesListItems.findOne({ where: { [Op.or]: [{ item_name: itemName }] } });
+        // if (categoriesListItems) {
+        //     return res.status(422)
+        //         .send({ message: 'Item name already exists' });
+        // }
         console.log("======= I am here");
         // Create new categories list
         const newData = await CategoriesListItems.create({
