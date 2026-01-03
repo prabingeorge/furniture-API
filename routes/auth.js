@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User,   Categories, CategoriesLists } = model;
+const { User,   Categories, CategoriesLists, CategoriesListItems } = model;
 
 console.log("Modal" + Categories);
 
@@ -145,6 +145,36 @@ router.post("/categories-list", async (req, res) => {
         });
 
         res.status(201).json({ id: newData.id, type: newData.type, imageName: newData?.image_name, categoryId: newData?.category_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+    } catch (e) {
+        console.log(e);
+        return res.status(500)
+            .send(
+                { message: 'Could not perform operation at this time, kindly try again later.' });
+    }
+});
+
+// Add Categories-list-items
+router.post("/categories-list-items", async (req, res) => {
+    const { itemName, imageName, price, discountPrice, ratings, sendItemsCount, listId } = req.body;
+    try {
+        const categoriesListItems = await CategoriesListItems.findOne({ where: { [Op.or]: [{ item_name: itemName }] } });
+        if (categoriesListItems) {
+            return res.status(422)
+                .send({ message: 'Item name already exists' });
+        }
+
+        // Create new categories list
+        const newData = await CategoriesListItems.create({
+            item_name: itemName,
+            image_name: imageName,
+            price,
+            discount_price: discountPrice,
+            ratings: ratings,
+            send_items_count: sendItemsCount,
+            list_id: listId
+        });
+
+        res.status(201).json({ id: newData?.id, itemName: newData.item_name, imageName: newData?.image_name, price: newData?.price, discountPrice: newData?.discount_price, ratings: newData?.ratings, sendItemsCount: newData?.send_items_count, listId: newData?.list_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
     } catch (e) {
         console.log(e);
         return res.status(500)
