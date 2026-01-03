@@ -9,7 +9,8 @@ const { User,   Categories, CategoriesLists, CategoriesListItems, PurchaseDetail
 const router = express.Router();
 
 // Get all categories (for the authenticated user)
-router.get("/categories", auth, async (req, res) => {
+// router.get("/categories", auth, async (req, res) => {
+router.get("/categories", async (req, res) => {
   try {
     const categories = await Categories.findAll();
     res.json(categories);

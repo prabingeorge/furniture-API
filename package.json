@@ -6,6 +6,7 @@
   "scripts": {
     "start1": "node server.js",
     "dev1": "nodemon server.js",
+    "db": "sequelize db:migrate",
     "start": "babel-node server.js",
     "dev": "nodemon --exec npm start"
   },
