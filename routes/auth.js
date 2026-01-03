@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User,   Categories, CategoriesLists, CategoriesListItems } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems } = model;
 
 console.log("Modal" + Categories);
 
@@ -156,13 +156,14 @@ router.post("/categories-list", async (req, res) => {
 // Add Categories-list-items
 router.post("/categories-list-items", async (req, res) => {
     const { itemName, imageName, price, discountPrice, ratings, sendItemsCount, listId } = req.body;
+    console.log("======" + JSON.stringify(req.body))
     try {
         const categoriesListItems = await CategoriesListItems.findOne({ where: { [Op.or]: [{ item_name: itemName }] } });
         if (categoriesListItems) {
             return res.status(422)
                 .send({ message: 'Item name already exists' });
         }
-
+        console.log("======= I am here");
         // Create new categories list
         const newData = await CategoriesListItems.create({
             item_name: itemName,
@@ -173,7 +174,7 @@ router.post("/categories-list-items", async (req, res) => {
             send_items_count: sendItemsCount,
             list_id: listId
         });
-
+        console.log("======= Tested here");
         res.status(201).json({ id: newData?.id, itemName: newData.item_name, imageName: newData?.image_name, price: newData?.price, discountPrice: newData?.discount_price, ratings: newData?.ratings, sendItemsCount: newData?.send_items_count, listId: newData?.list_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
     } catch (e) {
         console.log(e);
