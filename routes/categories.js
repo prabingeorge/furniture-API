@@ -129,4 +129,15 @@ router.get("/purchase-details", async (req, res) => {
   }
 });
 
+// Get all purchase details by userid
+router.post("/purchase-details-by-userid", async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const purchaseDetails = await PurchaseDetails.findAll({ where: { [Op.or]: [{ user_id: userId }] } });
+    res.json(purchaseDetails);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 export default router;
