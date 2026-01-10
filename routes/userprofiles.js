@@ -12,6 +12,7 @@ const router = express.Router();
 // Add Categories-list
 router.post("/send-mail", async (req, res) => {
     const { to, subject, message, attachments } = req.body;
+    console.log(req?.body);
     const transporter = nodemailer.createTransport({
         port: 465,
         host: "smtp.gmail.com",
