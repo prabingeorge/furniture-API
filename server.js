@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.js";
 // import protectedRoutes from "./routes/protected.js";
 // import postRoutes from "./routes/posts.js";
 import categoriesRoutes from "./routes/categories.js";
+import userProfilesRoutes from "./routes/userprofiles.js";
 
 // Load environment variables
 config();
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", categoriesRoutes);
+app.use("/api/user-profile", userProfilesRoutes);
 // app.use("/api/admin", adminRoutes);
 
 // Start server
