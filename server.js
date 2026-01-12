@@ -1,13 +1,10 @@
 import express, { json } from "express";
 import { config } from "dotenv";
 import cors from "cors";
-// import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
-// import adminRoutes from "./routes/admin.js";
-// import protectedRoutes from "./routes/protected.js";
-// import postRoutes from "./routes/posts.js";
 import categoriesRoutes from "./routes/categories.js";
 import userProfilesRoutes from "./routes/userprofiles.js";
+import adminUsersRoutes from "./routes/users.js";
 
 // Load environment variables
 config();
@@ -21,6 +18,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", categoriesRoutes);
 app.use("/api/user-profile", userProfilesRoutes);
+app.use("/api/admin/users-details", adminUsersRoutes);
 // app.use("/api/admin", adminRoutes);
 
 // Start server
