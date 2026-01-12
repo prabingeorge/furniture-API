@@ -14,15 +14,19 @@ router.post("/send-mail", async (req, res) => {
     const { to, subject, message, attachments } = req.body;
     console.log(req?.body);
     const transporter = nodemailer.createTransport({
-        port: 465, // 587, // 465,
+        // port: 465, // 587, // 465,
         host: "smtp.gmail.com",
-        secure: true,
-        // tls: { rejectUnauthorized: false },
+        // host: "smtp.one.com",
+        port: 587,
+        tls: {
+            rejectUnauthorized: false
+        },
+        // secure: false,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS, //'ilogwgyksuybyruc',
         },
-        secure: true, // upgrades later with STARTTLS -- change this based on the PORT
+        // secure: true, // upgrades later with STARTTLS -- change this based on the PORT
     });
 
     const mailData = {
