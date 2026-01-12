@@ -9,7 +9,7 @@ const { User, Categories, CategoriesLists, CategoriesListItems, PurchaseDetails 
 
 const router = express.Router();
 
-// Add Categories-list
+// Send Email
 router.post("/send-mail", async (req, res) => {
     const { to, subject, message, attachments } = req.body;
     console.log(req?.body);
@@ -34,24 +34,27 @@ router.post("/send-mail", async (req, res) => {
 
     // 3. Send the email
     try {
-        emailExistence.check(to, async (error, response) => {
-            if (error) {
-                console.error(error);
-            } else {
-                if (response) {
-                    console.log('Email exists. Proceed with Nodemailer.');
-                    // Call your Nodemailer sending function here
-                    const info = await transporter.sendMail(mailData);
-                    console.log('Message sent: %s', info.messageId);
-                    return res.status(200).json(info);
-                } else {
-                    console.log('Email does not exist. Kindly do provide valid Email!');
-                    return res.status(400)
-                        .send({ message: 'Email does not exist. Kindly do provide valid Email!' });
-                    // Handle invalid email, e.g., prompt user for correction
-                }
-            }
-        });
+        const info = await transporter.sendMail(mailData);
+        console.log('Message sent: %s', info.messageId);
+        return res.status(200).json(info);
+        // emailExistence.check(to, async (error, response) => {
+        //     if (error) {
+        //         console.error(error);
+        //     } else {
+        //         if (response) {
+        //             console.log('Email exists. Proceed with Nodemailer.');
+        //             // Call your Nodemailer sending function here
+        //             const info = await transporter.sendMail(mailData);
+        //             console.log('Message sent: %s', info.messageId);
+        //             return res.status(200).json(info);
+        //         } else {
+        //             console.log('Email does not exist. Kindly do provide valid Email!');
+        //             return res.status(400)
+        //                 .send({ message: 'Email does not exist. Kindly do provide valid Email!' });
+        //             // Handle invalid email, e.g., prompt user for correction
+        //         }
+        //     }
+        // });
     } catch (error) {
         console.log(error);
         return res.status(500)
